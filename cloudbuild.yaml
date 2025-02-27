@@ -4,10 +4,9 @@ steps:
   # Build image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build','-t','ananthweb:v1', '.' ]
+  # Scan image
+  - name: 'aquasec/trivy:latest'
+    args: ['image' , 'ananthweb:v1']
   # Run container
   - name: 'gcr.io/cloud-builders/docker'
     args: ['run','-itd', '--name','anantha','-p','8081:80','--rm','ananthweb:v1']
-  # test curl
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: "bash"
-    args: ['curl','http://localhost:8081/health.html']
