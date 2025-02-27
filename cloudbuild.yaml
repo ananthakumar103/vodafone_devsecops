@@ -8,6 +8,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['run','-itd', '--name','anantha','-p','8081:80','--rm','ananthweb:v1']
   # test curl
-  - name: 'ubuntu'
-    args: ['apt','install','curl']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: "bash"
     args: ['curl','http://localhost:8081/health.html']
