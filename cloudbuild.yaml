@@ -6,7 +6,7 @@ steps:
     args: ['build','-t','ananthweb:v1', '.' ]
   # Scan image
   - name: 'aquasec/trivy:latest'
-    args: ['image' , 'ananthweb:v1']
+    args: ['image' ,'--severity' ,'HIGH,CRITICAL' ,'--format', 'json',  '--output' , '/tmp/ashu_imagescan.json', 'ananthweb:v1']
   # Run container
   - name: 'gcr.io/cloud-builders/docker'
     args: ['run','-itd', '--name','anantha','-p','8081:80','--rm','ananthweb:v1']
