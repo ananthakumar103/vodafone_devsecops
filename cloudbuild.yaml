@@ -13,6 +13,7 @@ steps:
   # Push image to registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['image','tag','ananthweb:v1','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
+  - name: 'gcr.io/cloud-builders/docker'
     args: ['image','push','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
   # Run container
   - name: 'gcr.io/cloud-builders/docker'
