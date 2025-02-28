@@ -22,14 +22,17 @@ steps:
   # - name: 'gcr.io/cloud-builders/docker'
   #   args: ['exec','anantha','curl','-f','http://localhost/health.html']
   # GKE run
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply','-f','deploy-webapp-anantha.yaml']
-    env: # passing k8s info
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster-1'
-  # Get KFE details
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['get','deploy,pods']
-    env: # passing k8s info
-    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster-1'
+  # - name: 'gcr.io/cloud-builders/kubectl'
+  #   args: ['apply','-f','deploy-webapp-anantha.yaml']
+  #   env: # passing k8s info
+  #     - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+  #     - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster-1'
+  # # Get KFE details
+  # - name: 'gcr.io/cloud-builders/kubectl'
+  #   args: ['get','deploy,pods']
+  #   env: # passing k8s info
+  #   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+  #   - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster-1'
+  # Build terraform platform
+  - name: 'hashicorp/terraform:1.0.0'
+    args: ['apply','-auto-approve']
