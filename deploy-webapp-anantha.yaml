@@ -18,9 +18,10 @@ spec:
         app: anantha-app-deploy
     spec:
       containers:
-      - image: httpd
-        name: httpd
+      - image: asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1
+        name: cont-anantha
         ports:
         - containerPort: 80
+        imagePullPolicy: Always
         resources: {}
 status: {}
