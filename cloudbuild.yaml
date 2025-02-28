@@ -34,5 +34,9 @@ steps:
   #   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
   #   - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster-1'
   # Build terraform platform
-  - name: 'hashicorp/terraform:1.0.0'
+  - name: 'gcr.io/cloud-builders/terraform'
+    args: ['init']
+  - name: 'gcr.io/cloud-builders/terraform'
+    args: ['plan']
+  - name: 'gcr.io/cloud-builders/terraform'
     args: ['apply','-auto-approve']
