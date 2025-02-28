@@ -1,26 +1,26 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
-  # Build image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build','-t','ananthweb:v1', '.' ]
-  # Scan image
-  - name: 'aquasec/trivy:latest'
-    args: ['image' ,'--severity' ,'HIGH,CRITICAL' ,'--format', 'json',  '--output' , '/workspace/anantha_imagescan.json','--exit-code', '0', 'ananthweb:v1']
-  # Save result in GCS
-  - name: 'google/cloud-sdk'
-    args: ['gsutil','cp','/workspace/anantha_imagescan.json','gs://anantha_voda_devsecops/trivy_scan_result']
-  # Push image to registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['image','tag','ananthweb:v1','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['image','push','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
-  # Run container
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['run','-itd', '--name','anantha','-p','8081:80','--rm','ananthweb:v1']
-  # health check
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['exec','anantha','curl','-f','http://localhost/health.html']
+  # # Build image
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['build','-t','ananthweb:v1', '.' ]
+  # # Scan image
+  # - name: 'aquasec/trivy:latest'
+  #   args: ['image' ,'--severity' ,'HIGH,CRITICAL' ,'--format', 'json',  '--output' , '/workspace/anantha_imagescan.json','--exit-code', '0', 'ananthweb:v1']
+  # # Save result in GCS
+  # - name: 'google/cloud-sdk'
+  #   args: ['gsutil','cp','/workspace/anantha_imagescan.json','gs://anantha_voda_devsecops/trivy_scan_result']
+  # # Push image to registry
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['image','tag','ananthweb:v1','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['image','push','asia-south1-docker.pkg.dev/vodafone-devsecops/anantha-image-registry/ananthweb:v1']
+  # # Run container
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['run','-itd', '--name','anantha','-p','8081:80','--rm','ananthweb:v1']
+  # # health check
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['exec','anantha','curl','-f','http://localhost/health.html']
   # GKE run
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply','-f','deploy-webapp-anantha.yaml']
