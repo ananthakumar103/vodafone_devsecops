@@ -1,0 +1,11 @@
+services:
+  anantha-python-app:
+  # image we want to build
+    image: anantha-pyapp:v1
+    # location and name of Dockerfile  
+    build:
+      context: ./pyapp
+      dockerfile: Dockerfile  
+  anantha-web-app:
+    image: anantha-webapp:v1
+    build: .
